@@ -21,6 +21,13 @@ DATABASES = {
     }
 }
 
+COUCHBASE = {
+    'HOST': '10.3.121.195',
+    'PORT': '8091',
+    'USER': 'Administrator',
+    'PASSWORD': 'password',
+}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -102,9 +109,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'django_cbkarma.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.path.dirname(__file__), 'templates').replace('\\', '/'),
 )
 
 INSTALLED_APPS = (
