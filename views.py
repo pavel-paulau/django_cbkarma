@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 from couchbase.client import CbClient
 from couchbase.histo import LatencyDict
@@ -45,11 +46,15 @@ def details(request):
     histograms = client.find(test_id).get('histograms', {})
     histograms = dict((d, LatencyDict(a)) for d, a in histograms.iteritems())
 
+    client.find(test_id)
     reports = client.find(test_id).get('reports', {})
 
-    context = {'phases': phases, 'histograms': histograms, 'reports': reports,
-               'build': client.find(test_id)['build'],
-               'spec': client.find(test_id)['spec'],
-               'test_id': test_id, 'title': 'Test Details'}
+    context = RequestContext(request, {'phases': phases,
+                                       'histograms': histograms,
+                                       'reports': reports,
+                                       'build': client.find(test_id)['build'],
+                                       'spec': client.find(test_id)['spec'],
+                                       'test_id': test_id,
+                                       'title': 'Test Details'})
 
     return render_to_response('details.html', context)
