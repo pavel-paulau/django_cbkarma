@@ -28,7 +28,7 @@ class CbClient:
         try:
             doc = self.mc_client.get(str(test_id))
             return json.loads(doc)
-        except ValueError as error:
+        except (TypeError, ValueError) as error:
             print error
             return {}
 
