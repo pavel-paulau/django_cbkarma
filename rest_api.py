@@ -5,6 +5,7 @@ from uuid import uuid4
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST, require_GET
+from django.views.decorators.csrf import csrf_exempt
 
 from couchbase.client import CbClient
 
@@ -12,6 +13,7 @@ from couchbase.client import CbClient
 def init(request):
     return HttpResponse(uuid4().hex)
 
+@csrf_exempt
 @require_POST
 def update(request):
     client = CbClient()
@@ -38,6 +40,7 @@ def update(request):
 
     return HttpResponse(test_id)
 
+@csrf_exempt
 @require_POST
 def histo(request):
     client = CbClient()
@@ -56,6 +59,7 @@ def histo(request):
 
     return HttpResponse(test_id)
 
+@csrf_exempt
 @require_POST
 def report(request):
     client = CbClient()
