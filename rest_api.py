@@ -22,6 +22,7 @@ def update(request):
 
     build = request.POST.get('build', '')
     spec = request.POST.get('spec', '')
+    ini = request.POST.get('ini', '')
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     phase = request.POST.get('phase', '')
     status = request.POST.get('status', '')
@@ -31,6 +32,7 @@ def update(request):
 
     doc = {'build': build,
            'spec': spec,
+           'ini': ini,
            'events': events,
            'type': 'update'}
 
