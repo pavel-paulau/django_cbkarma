@@ -34,8 +34,9 @@ def details(request):
 
     # Phases
     test_id = request.GET['id']
+    test_details = client.find(test_id)
 
-    events = client.find(test_id)['events']
+    events = test_details['events']
 
     phases = list()
     for event in sorted(events):
@@ -43,17 +44,16 @@ def details(request):
                                                     events[event]['status'],
                                                     event))
 
-    histograms = client.find(test_id).get('histograms', {})
+    histograms = test_details.get('histograms', {})
     histograms = dict((d, LatencyDict(a)) for d, a in histograms.iteritems())
 
-    client.find(test_id)
-    reports = client.find(test_id).get('reports', {})
+    reports = test_details.get('reports', {})
 
     context = RequestContext(request, {'phases': phases,
                                        'histograms': histograms,
                                        'reports': reports,
-                                       'build': client.find(test_id)['build'],
-                                       'spec': client.find(test_id)['spec'],
+                                       'build': test_details['build'],
+                                       'spec': test_details['spec'],
                                        'test_id': test_id,
                                        'title': 'Test Details'})
 
