@@ -64,18 +64,14 @@ def histo(request):
 def report(request):
     client = CbClient()
 
-    print request.POST
     test_id = request.POST.get('test_id', uuid4().hex)
     description = request.POST.get('description', uuid4().hex)
     url = request.POST.get('url', '')
-
-    print client.find(test_id)
 
     reports = client.find(test_id).get('reports', {})
     reports.update({description: url})
 
     doc = {'reports': reports}
-    print doc
 
     client.update(test_id, doc)
 
