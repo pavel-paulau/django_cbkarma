@@ -5,38 +5,38 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Summary</a></li>
-        <li><a href="#tabs-2">Phases</a></li>
-        <li><a href="#tabs-3">Histograms</a></li>
-        <li><a href="#tabs-4">PDF Reports</a></li>
+        <li><a href="#tabs-2">Histograms</a></li>
+        <li><a href="#tabs-3">PDF Reports</a></li><!--Legacy-->
 	</ul>
     <div id="tabs-1">
+        <p><strong>Parameters</strong></p>
         <pre>build: <a href="http://builds.hq.northscale.net/latestbuilds/CHANGES_couchbase-server-{{ build }}.txt">{{ build }}</a></pre>
         <pre>specification: <a href="https://raw.github.com/couchbase/testrunner/master/conf/perf/{{ spec }}.conf">{{ spec }}</a></pre>
         <pre>cluster: <a href="https://raw.github.com/couchbase/testrunner/master/resources/perf/{{ ini }}.ini">{{ ini }}</a></pre>
-    </div>
-    <div id="tabs-2">
+
+        <p><strong>Phases</strong></p>
         {% for phase in phases %}
             <pre>{{ phase }}</pre>
         {% endfor %}
+
+        {% if reports %}
+        <p><strong>Reports</strong></p>
+        {% for description, url in reports.items %}
+            <pre><a href="{{ url }}" target="_blank">{{ description }}</a></pre>
+        {% endfor %}
+        </ul>
+        {% endif %}
     </div>
-    <div id="tabs-3">
+    <div id="tabs-2">
         {% for description, attachment in histograms.items %}
             <p><b>{{ description }}</b></p>
             <pre>{{ attachment }}</pre>
         {% endfor %}
     </div>
-    <div id="tabs-4">
-        {% if reports %}
-            <p><strong>Existing:</strong></p>
-            <ul>
-                {% for description, url in reports.items %}
-                    <li><pre><a href="{{ url }}" target="_blank">{{ description }}</a></pre></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        <p><strong>Add new:</strong></p>
+    <div id="tabs-3">
+        <p><strong>Add Link:</strong></p>
         <form name="report" method="POST" action="/report">{% csrf_token %}
-            <pre>Description: <input type="text" name="description" /> URL:<input type="text" name="url" /> <input type="submit" name="submit" value="Submit" /></pre>
+            <pre>Tag name: <input type="text" name="description" /> URL:<input type="text" name="url" /> <input type="submit" name="submit" value="Submit" /></pre>
             <input type="hidden" name="test_id" value="{{ test_id }}">
         </form>
     </div>
