@@ -36,7 +36,7 @@ def details(request):
     test_id = request.GET['id']
     test_details = client.find(test_id)
 
-    events = test_details['events']
+    events = test_details.get('events', {})
 
     phases = list()
     for event in sorted(events):
@@ -52,8 +52,8 @@ def details(request):
     context = RequestContext(request, {'phases': phases,
                                        'histograms': histograms,
                                        'reports': reports,
-                                       'build': test_details['build'],
-                                       'spec': test_details['spec'],
+                                       'build': test_details.get('build'),
+                                       'spec': test_details.get('spec'),
                                        'test_id': test_id,
                                        'title': 'Test Details'})
 
