@@ -54,6 +54,7 @@ def details(request):
                                        'reports': reports,
                                        'build': test_details.get('build'),
                                        'spec': test_details.get('spec'),
+                                       'ini': test_details.get('ini'),
                                        'test_id': test_id,
                                        'title': 'Test Details'})
 
