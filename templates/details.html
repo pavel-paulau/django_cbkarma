@@ -5,7 +5,9 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Summary</a></li>
+        {% if histograms %}
         <li><a href="#tabs-2">Histograms</a></li>
+        {% endif %}
         <li><a href="#tabs-3">PDF Reports</a></li><!--Legacy-->
 	</ul>
     <div id="tabs-1">
@@ -27,12 +29,14 @@
         </ul>
         {% endif %}
     </div>
+    {% if histograms %}
     <div id="tabs-2">
         {% for description, attachment in histograms.items %}
             <p><b>{{ description }}</b></p>
             <pre>{{ attachment }}</pre>
         {% endfor %}
     </div>
+    {% endif %}
     <div id="tabs-3">
         <p><strong>Add Link:</strong></p>
         <form name="report" method="POST" action="/report">{% csrf_token %}
