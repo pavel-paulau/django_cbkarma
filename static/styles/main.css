@@ -24,3 +24,7 @@ body a:hover {
 .summary table {
     table-layout: fixed;
 }
+
+.summary .display .test_id {
+   font-weight: 500;
+}

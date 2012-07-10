@@ -18,7 +18,7 @@
                 {% for row in data %}
                 <tr>
                     <td>{{ row.timestamp }}</td>
-                    <td><a href='/details?id={{ row.test_id }}'>{{ row.test_id }}</a></td>
+                    <td class="test_id"><a href='/details?id={{ row.test_id }}'>{{ row.test_id }}</a></td>
                     <td>{{ row.spec }}</td>
                     <td>{{ row.ini }}</td>
                     <td>{{ row.build }}</td>
