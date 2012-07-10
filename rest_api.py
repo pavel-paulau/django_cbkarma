@@ -22,7 +22,6 @@ def update(request):
 
     build = request.POST.get('build', '')
     spec = request.POST.get('spec', '')
-    description = request.POST.get('description', '')
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     phase = request.POST.get('phase', '')
     status = request.POST.get('status', '')
@@ -32,7 +31,6 @@ def update(request):
 
     doc = {'build': build,
            'spec': spec,
-           'description': description,
            'events': events,
            'type': 'update'}
 

@@ -19,7 +19,6 @@ def home(request):
         data.append({'test_id': row['id'],
                      'build': row['value']['build'],
                      'spec': row['value']['spec'],
-                     'description': row['value']['description'],
                      'status': status,
                      'timestamp': latest_timestamp
         })
