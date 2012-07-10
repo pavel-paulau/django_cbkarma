@@ -17,8 +17,8 @@ def home(request):
                  row['value']['events'][latest_timestamp]['status']
 
         data.append({'test_id': row['id'],
-                     'build': row['value']['build'],
-                     'spec': row['value']['spec'],
+                     'build': row['value'].get('build', ''),
+                     'spec': row['value'].get('spec', ''),
                      'status': status,
                      'timestamp': latest_timestamp
         })
